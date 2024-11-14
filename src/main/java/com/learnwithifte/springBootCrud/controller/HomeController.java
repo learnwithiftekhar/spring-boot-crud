@@ -4,10 +4,7 @@ import com.learnwithifte.springBootCrud.model.Customer;
 import com.learnwithifte.springBootCrud.service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,4 +38,12 @@ public class HomeController {
         customerService.save(customer);
         return "redirect:/";
     }
+
+    @GetMapping("customer/{id}/edit")
+    public String edit(@PathVariable long id, Model model) {
+        Customer customer = customerService.findById(id).orElse(null);
+        model.addAttribute("customer", customer);
+        return "create";
+    }
+
 }
