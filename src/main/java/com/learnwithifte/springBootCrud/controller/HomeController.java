@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.awt.print.Book;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -22,9 +22,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(@RequestParam(value = "name", defaultValue = "") String name, Model model) {
-        String sayHello  = "Hello "+name;
 
-        model.addAttribute("message", sayHello);
+        List<Customer> customerList = customerService.findAll();
+
+        model.addAttribute("customerList", customerList);
         return "home";
     }
 

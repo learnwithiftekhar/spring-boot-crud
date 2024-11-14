@@ -4,6 +4,8 @@ import com.learnwithifte.springBootCrud.model.Customer;
 import com.learnwithifte.springBootCrud.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
 
@@ -11,6 +13,10 @@ public class CustomerService {
 
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+    }
+
+    public List<Customer> findAll() {
+        return (List<Customer>) customerRepository.findAll();
     }
 
     public Customer save(Customer customer) {
