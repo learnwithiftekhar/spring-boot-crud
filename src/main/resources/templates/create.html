@@ -45,7 +45,7 @@
                     <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">New Customer</h2>
                     <p class="mt-2 text-lg/8 text-gray-600">Please fill up the Customer Information</p>
                 </div>
-                <form th:action="@{/customer}" role="form" th:method="POST" th:object="${customer}" class="mx-auto mt-16 max-w-xl sm:mt-20">
+                <form th:action="@{/save}" role="form" th:method="POST" th:object="${customer}" class="mx-auto mt-16 max-w-xl sm:mt-20">
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
                             <label for="firstName" class="block text-sm/6 font-semibold text-gray-900">First name</label>
