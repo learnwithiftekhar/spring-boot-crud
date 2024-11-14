@@ -46,4 +46,11 @@ public class HomeController {
         return "create";
     }
 
+    @GetMapping("customer/{id}/delete")
+    public String delete(@PathVariable long id, Model model) {
+        Customer customer = customerService.findById(id).orElse(null);
+        customerService.delete(customer);
+        return "redirect:/";
+    }
+
 }
