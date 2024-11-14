@@ -2,8 +2,10 @@ package com.learnwithifte.springBootCrud.controller;
 
 import com.learnwithifte.springBootCrud.model.Customer;
 import com.learnwithifte.springBootCrud.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +36,12 @@ public class HomeController {
     }
 
     @PostMapping("save")
-    public String save(@ModelAttribute("customer") Customer customer, Model model) {
+    public String save(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Model model) {
+
+        if(bindingResult.hasErrors()) {
+            return "/create";
+        }
+
         customerService.save(customer);
         return "redirect:/";
     }
