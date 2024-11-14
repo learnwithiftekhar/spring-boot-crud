@@ -3,6 +3,8 @@ package com.learnwithifte.springBootCrud.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity(name = "Customer")
 @Table(name = "customer")
@@ -13,9 +15,13 @@ public class Customer {
     private Long id;
 
     @Column(name = "first_name")
+    @NotEmpty(message = "First Name is required")
+    @Size(min = 5, message = "First name should be at least 5 characters")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotEmpty(message = "Last Name is required")
+    @Size(min = 5, message = "Last name should be at least 5 characters")
     private String lastName;
 
     @Column(name = "email")
