@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -36,13 +37,15 @@ public class HomeController {
     }
 
     @PostMapping("save")
-    public String save(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Model model) {
+    public String save(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
         if(bindingResult.hasErrors()) {
             return "/create";
         }
 
         customerService.save(customer);
+
+        redirectAttributes.addFlashAttribute("message", "Customer saved successfully");
         return "redirect:/";
     }
 
@@ -54,9 +57,9 @@ public class HomeController {
     }
 
     @GetMapping("customer/{id}/delete")
-    public String delete(@PathVariable long id, Model model) {
-        Customer customer = customerService.findById(id).orElse(null);
-        customerService.delete(customer);
+    public String delete(@PathVariable long id, Model model, RedirectAttributes redirectAttributes) {
+        customerService.deleteById(id);
+        redirectAttributes.addFlashAttribute("message", "Customer deleted successfully");
         return "redirect:/";
     }
 
