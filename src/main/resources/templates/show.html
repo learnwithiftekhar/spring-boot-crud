@@ -32,7 +32,7 @@
 
     <header class="bg-white shadow">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900">List of customers</h1>
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900" th:text="${customer.firstName+' '+customer.lastName}"></h1>
         </div>
     </header>
     <main>
@@ -43,33 +43,35 @@
                 <p th:text="${message}"></p>
             </div>
 
-            <a th:href="@{'/create'}" class="bg-blue-600 font-medium px-3 py-2 rounded-md text-sm text-white inline-block mb-5 hover:bg-blue-700"> Add New</a>
             <table class="table-auto w-full">
-                <thead class="bg-gray-800 text-white uppercase">
                 <tr>
-                    <th class="px-6 py-3 text-center">ID</th>
-                    <th class="px-6 py-3 text-center">First Name</th>
-                    <th class="px-6 py-3 text-center">Last Name</th>
-                    <th class="px-6 py-3 text-center">Email</th>
-                    <th class="px-6 py-3 text-center">Phone</th>
-                    <th class="px-6 py-3 text-center"></th>
+                    <th class="uppercase border text-left px-6">ID</th>
+                    <td class="px-6 py-4 border" th:text="${customer.id}"></td>
                 </tr>
-                </thead>
 
-                <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" th:each="customer: ${customerList}">
-                    <td class="px-6 py-4 text-center" th:text="${customer.id}"></td>
-                    <td class="px-6 py-4 text-center" th:text="${customer.firstName}"></td>
-                    <td class="px-6 py-4 text-center" th:text="${customer.lastName}"></td>
-                    <td class="px-6 py-4 text-center" th:text="${customer.phone}"></td>
-                    <td class="px-6 py-4 text-center" th:text="${customer.email}"></td>
-                    <td class="px-6 py-4 text-center">
-                        <a th:href="@{/customer/{id}(id=${customer.id})}" class="bg-green-600 font-medium hover:bg-green-700 px-3 py-2 rounded-md text-sm text-white">View</a>
-                        <a th:href="@{/customer/{id}/edit(id=${customer.id})}" class="bg-blue-600 font-medium hover:bg-blue-700 px-3 py-2 rounded-md text-sm text-white">Edit</a>
-                        <a th:href="@{/customer/{id}/delete(id=${customer.id})}" class="bg-red-600 font-medium hover:bg-red-700 px-3 py-2 rounded-md text-sm text-white">Delete</a></td>
+                <tr>
+                    <th class="uppercase border text-left px-6">First Name</th>
+                    <td class="px-6 py-4 border" th:text="${customer.firstName}"></td>
                 </tr>
-                </tbody>
+
+                <tr>
+                    <th class="uppercase border text-left px-6">Last Name</th>
+                    <td class="px-6 py-4 border" th:text="${customer.lastName}"></td>
+                </tr>
+
+                <tr>
+                    <th class="uppercase border text-left px-6">Phone</th>
+                    <td class="px-6 py-4 border" th:text="${customer.phone}"></td>
+                </tr>
+
+                <tr>
+                    <th class="uppercase border text-left px-6">Phone</th>
+                    <td class="px-6 py-4 border" th:text="${customer.email}"></td>
+                </tr>
             </table>
+
+            <a th:href="@{/customer/{id}/delete(id=${customer.id})}" class="bg-red-600 font-medium px-3 py-2 rounded-md text-sm text-white inline-block mb-5 hover:bg-red-700 my-10">Delete</a>
+
         </div>
     </main>
 </div>

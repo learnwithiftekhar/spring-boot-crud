@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -47,6 +48,15 @@ public class HomeController {
 
         redirectAttributes.addFlashAttribute("message", "Customer saved successfully");
         return "redirect:/";
+    }
+
+    @GetMapping("/customer/{id}")
+    public String customer(@PathVariable Long id, Model model) {
+        Optional<Customer> customer = customerService.findById(id);
+
+        customer.ifPresent(value -> model.addAttribute("customer", value));
+
+        return "show";
     }
 
     @GetMapping("customer/{id}/edit")
