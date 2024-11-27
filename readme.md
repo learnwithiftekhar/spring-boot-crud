@@ -90,5 +90,5 @@ The ``pom.xml`` file includes the following key dependencies:
 
 Contact
 For any questions or feedback, please reach out:
-- **GitHub**: [your-username](https://github.com/learnwithiftekhar)
-- **Email**: [your-email@example.com](mailto:learnwithiftekhar@gmail.com)
+- **GitHub**: [Learn with iftekhar](https://github.com/learnwithiftekhar)
+- **Email**: [learnwithiftekhar@gmail.com](mailto:learnwithiftekhar@gmail.com)
