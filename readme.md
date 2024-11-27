@@ -92,14 +92,3 @@ Contact
 For any questions or feedback, please reach out:
 - **GitHub**: [your-username](https://github.com/learnwithiftekhar)
 - **Email**: [your-email@example.com](mailto:learnwithiftekhar@gmail.com)
-
-
-
-### Instructions for Updating
-- Replace `https://youtube.com/your-video-link` with your actual YouTube video link.
-- Replace `https://github.com/your-username/your-repository.git` with your GitHub repository URL.
-- Substitute `your_database_name`, `your_database_username`, and `your_database_password` with your MySQL database information.
-- Update `your-username` and `your-email@example.com` with your actual GitHub username and email.
-
-This `README.md` is fully structured for direct use. Just update the placeholders, and you’re ready to go!
-
