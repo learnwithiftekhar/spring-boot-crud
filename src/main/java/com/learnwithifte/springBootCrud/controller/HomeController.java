@@ -24,7 +24,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(@RequestParam(value = "name", defaultValue = "") String name, Model model) {
 
-        List<Customer> customerList = customerService.findAll();
+        List<Customer> customerList = customerService.getAllCustomers();
 
         model.addAttribute("customerList", customerList);
         return "home";
