@@ -43,32 +43,37 @@
                 <p th:text="${message}"></p>
             </div>
 
-            <table class="table-auto w-full">
-                <tr>
-                    <th class="uppercase border text-left px-6">ID</th>
-                    <td class="px-6 py-4 border" th:text="${customer.id}"></td>
-                </tr>
+            <div class="grid grid-cols-3">
+                <div>
+                    <img th:src="@{/{image}(image=${customer.photosImagePath})}" id=" thumbnail" class="w-auto border p-1 rounded-md" alt="Photo preview">
+                </div>
+                <table class="table-auto w-full col-span-2">
+                    <tr>
+                        <th class="bg-gray-800 text-white uppercase border text-left px-6">ID</th>
+                        <td class="bg-white border-b px-6 py-4 border" th:text="${customer.id}"></td>
+                    </tr>
 
-                <tr>
-                    <th class="uppercase border text-left px-6">First Name</th>
-                    <td class="px-6 py-4 border" th:text="${customer.firstName}"></td>
-                </tr>
+                    <tr>
+                        <th class="bg-gray-800 text-white uppercase border text-left px-6">First Name</th>
+                        <td class="bg-white border-b px-6 py-4 border" th:text="${customer.firstName}"></td>
+                    </tr>
 
-                <tr>
-                    <th class="uppercase border text-left px-6">Last Name</th>
-                    <td class="px-6 py-4 border" th:text="${customer.lastName}"></td>
-                </tr>
+                    <tr>
+                        <th class="bg-gray-800 text-white uppercase border text-left px-6">Last Name</th>
+                        <td class="bg-white border-b px-6 py-4 border" th:text="${customer.lastName}"></td>
+                    </tr>
 
-                <tr>
-                    <th class="uppercase border text-left px-6">Phone</th>
-                    <td class="px-6 py-4 border" th:text="${customer.phone}"></td>
-                </tr>
+                    <tr>
+                        <th class="bg-gray-800 text-white uppercase border text-left px-6">Phone</th>
+                        <td class="bg-white border-b px-6 py-4 border" th:text="${customer.phone}"></td>
+                    </tr>
 
-                <tr>
-                    <th class="uppercase border text-left px-6">Phone</th>
-                    <td class="px-6 py-4 border" th:text="${customer.email}"></td>
-                </tr>
-            </table>
+                    <tr>
+                        <th class="bg-gray-800 text-white uppercase border text-left px-6">Phone</th>
+                        <td class="bg-white border-b px-6 py-4 border" th:text="${customer.email}"></td>
+                    </tr>
+                </table>
+            </div>
 
             <a th:href="@{/customer/{id}/delete(id=${customer.id})}" class="bg-red-600 font-medium px-3 py-2 rounded-md text-sm text-white inline-block mb-5 hover:bg-red-700 my-10">Delete</a>
 

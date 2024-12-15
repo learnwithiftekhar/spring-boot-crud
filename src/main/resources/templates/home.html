@@ -48,17 +48,21 @@
                 <thead class="bg-gray-800 text-white uppercase">
                 <tr>
                     <th class="px-6 py-3 text-center">ID</th>
+                    <th class="px-6 py-3 text-center">Photo</th>
                     <th class="px-6 py-3 text-center">First Name</th>
                     <th class="px-6 py-3 text-center">Last Name</th>
                     <th class="px-6 py-3 text-center">Email</th>
                     <th class="px-6 py-3 text-center">Phone</th>
-                    <th class="px-6 py-3 text-center"></th>
+                    <th class="px-6 py-3 text-center">&nbsp;</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" th:each="customer: ${customerList}">
                     <td class="px-6 py-4 text-center" th:text="${customer.id}"></td>
+                    <td class="px-6 py-4 text-center">
+                        <img th:src="@{${customer.photosImagePath}}" id=" thumbnail" class="h-16 w-auto border p-1 rounded-md" alt="Photo preview">
+                    </td>
                     <td class="px-6 py-4 text-center" th:text="${customer.firstName}"></td>
                     <td class="px-6 py-4 text-center" th:text="${customer.lastName}"></td>
                     <td class="px-6 py-4 text-center" th:text="${customer.phone}"></td>

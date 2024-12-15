@@ -2,13 +2,17 @@ package com.learnwithifte.springBootCrud.controller;
 
 import com.learnwithifte.springBootCrud.model.Customer;
 import com.learnwithifte.springBootCrud.service.CustomerService;
+import com.learnwithifte.springBootCrud.service.FileUploadService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,13 +42,32 @@ public class HomeController {
     }
 
     @PostMapping("save")
-    public String save(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String save(
+            @Valid @ModelAttribute("customer") Customer customer,
+            BindingResult bindingResult, Model model,
+            RedirectAttributes redirectAttributes,
+            @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         if(bindingResult.hasErrors()) {
             return "/create";
         }
 
-        customerService.save(customer);
+        if(!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+            customer.setPhoto(fileName);
+
+            Customer savedCustomer = customerService.save(customer);
+
+            String uploadDir = "customer-photos/"+savedCustomer.getId();
+            FileUploadService.saveFile(uploadDir, fileName, multipartFile);
+
+        }
+
+
+
+
+//
 
         redirectAttributes.addFlashAttribute("message", "Customer saved successfully");
         return "redirect:/";

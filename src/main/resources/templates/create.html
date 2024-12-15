@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title th:text="${customer.id == null ? 'Add new customer':'Edit '+customer.firstName+' '+customer.lastName}"></title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 <body class="h-full">
 
@@ -45,7 +47,8 @@
                     <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl" th:text="${customer.id == null ? 'Add new customer':'Edit '+customer.firstName+' '+customer.lastName}"></h2>
                     <p class="mt-2 text-lg/8 text-gray-600">Please fill up the Customer Information</p>
                 </div>
-                <form th:action="@{/save}" role="form" th:method="POST" th:object="${customer}" class="mx-auto mt-16 max-w-xl sm:mt-20">
+                <form th:action="@{/save}" role="form" th:method="POST" th:object="${customer}" class="mx-auto mt-16 max-w-xl sm:mt-20"
+                enctype="multipart/form-data">
                     <input type="hidden" th:field="${customer.id}">
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
@@ -78,6 +81,20 @@
                                 <input type="text" th:field="${customer.phone}" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                             </div>
                         </div>
+
+
+                            <div>
+                                <label for="fileImage" class="block text-sm/6 font-semibold text-gray-900">Image</label>
+                                <div class="mt-2.5">
+                                    <input type="file" id="fileImage" name="image" accept="image/png, image/jpeg" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                    <p id="imageError" class="hidden text-red-600 text-sm mt-1">File size exceeds 1MB. Please upload a smaller file.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <img th:src="@{/{image}(image=${customer.photosImagePath})}" id="thumbnail" class="h-24 w-auto border p-1 rounded-md" alt="Photo preview">
+                            </div>
+
+
                     </div>
                     <div class="mt-10">
                         <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
@@ -88,7 +105,31 @@
         </div>
     </main>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#fileImage').change(function () {
 
+            fileSize = this.files[0].size;
+
+            if(fileSize > 1048576) {
+                $('#imageError').removeClass("hidden")
+            } else {
+                $('#imageError').addClass("hidden")
+                showImageThumbnail(this);
+            }
+        });
+    });
+
+    function showImageThumbnail(fileInput) {
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#thumbnail').attr("src", e.target.result);
+        };
+        reader.readAsDataURL(file);
+
+    }
+</script>
 
 </body>
 </html>

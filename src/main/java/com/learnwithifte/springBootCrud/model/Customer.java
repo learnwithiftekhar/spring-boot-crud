@@ -32,6 +32,12 @@ public class Customer {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "photo")
+    private String photo;
+
+    @Transient
+    private String photosImagePath;
+
     public Long getId() {
         return id;
     }
@@ -70,5 +76,20 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotosImagePath() {
+        if(id == null || photo == null){
+            return "images/avatar-default.jpg";
+        }
+        return "customer-photos/"+this.id+"/"+this.photo;
     }
 }
